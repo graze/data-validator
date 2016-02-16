@@ -1,0 +1,40 @@
+{
+    "name": "graze/data-validator",
+
+    "description": "Validate data, decoupled from your front end presentation.",
+
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Graze Developers",
+            "email": "developers@graze.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": { "Graze\\DataValidator\\": "src/" }
+    },
+
+    "autoload-dev": {
+        "psr-4": { "": "tests/unit/" }
+    },
+
+    "require": {
+        "php": "^5.5 || ^7.0"
+    },
+
+    "suggest": {
+        "respect/validation": "Use Respect validators through Graze\\DataValidator\\Adapter\\RespectValidationAdapter"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^4.0 || ^5.1.1",
+        "mockery/mockery": "^0.9.4",
+        "graze/hamcrest-test-listener": "^1.0.1",
+
+        "respect/validation": "^1.0",
+        "symfony/validator": "^2.6",
+        "zendframework/zend-validator": "^2.3"
+    }
+}
