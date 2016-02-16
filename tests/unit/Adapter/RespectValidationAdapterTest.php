@@ -11,7 +11,6 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
-use Graze\DataValidator\Adapter\AbstractExecutableAdapter;
 use Graze\DataValidator\Adapter\RespectValidationAdapter;
 use Respect\Validation\Validatable as RespectValidatable;
 use Respect\Validation\Validator;
@@ -31,7 +30,6 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
         $validator = new RespectValidationAdapter('respect_validator', $respectValidator);
 
         assertThat($validator, is(callableValue()));
-        assertThat($validator, is(anInstanceOf(AbstractExecutableAdapter::class)));
     }
 
     /**

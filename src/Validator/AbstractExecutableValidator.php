@@ -11,26 +11,34 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
-namespace Graze\DataValidator;
+namespace Graze\DataValidator\Validator;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-interface ValidatorAwareInterface
+abstract class AbstractExecutableValidator
 {
     /**
-     * Register a validator.
+     * @param array $data
      *
-     * The callable should accept an array as it's only argument.
+     * @return string
+     */
+    public function __invoke(array $data)
+    {
+        return $this->validate($data);
+    }
+
+    /**
+     * Validate the given data.
      *
-     * The validator callable should return `null` if the given data is valid.
+     * The validator should return `null` if the given data is valid.
      *
      * Otherwise it should return a `string` that will be appended
      * to the array returned by calls to {@see DataValidatorInterface::validate()}.
      *
-     * @param callable $validator
+     * @param array $data
      *
-     * @return DataValidatorInterface
+     * @return string|null
      */
-    public function addValidator(callable $validator);
+    abstract protected function validate(array $data);
 }

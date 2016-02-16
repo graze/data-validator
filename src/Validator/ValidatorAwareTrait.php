@@ -11,21 +11,29 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
-namespace Graze\DataValidator;
+namespace Graze\DataValidator\Validator;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-interface ProcessorAwareInterface
+trait ValidatorAwareTrait
 {
     /**
-     * Register a processor.
+     * @var array
+     */
+    protected $validators = [];
+
+    /**
+     * {@inheritDoc}
      *
-     * The callable should accept an array as it's only argument.
-     *
-     * @param callable $processor
+     * @param callable $validator
      *
      * @return DataValidatorInterface
      */
-    public function addProcessor(callable $processor);
+    public function addValidator(callable $validator)
+    {
+        $this->validators[] = $validator;
+
+        return $this;
+    }
 }

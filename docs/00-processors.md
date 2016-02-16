@@ -5,10 +5,12 @@ Transform data before (or after) validation by registering and applying processo
 For example, let's build a processor to remove any items in the array we're not interested in.
 
 ```php
+use Graze\DataValidator\Processor\AbstractExecutableProcessor;
+
 /**
  * The KeyExistsProcessor cleans up data by ensuring only the given keys exist in the data array.
  */
-class KeyFilterProcessor
+class KeyFilterProcessor extends AbstractExecutableProcessor
 {
     /**
      * @var array
@@ -29,7 +31,7 @@ class KeyFilterProcessor
      * @param array $data
      * @return array
      */
-    protected function __invoke(array $data)
+    protected function process(array $data)
     {
         foreach ($data as $key => $value) {
             // Remove any items in the array that we're not expecting.
