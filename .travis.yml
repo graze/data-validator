@@ -13,6 +13,10 @@ matrix:
     - php: 5.5
       env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
+cache:
+  directories:
+    - vendor/
+
 install:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
