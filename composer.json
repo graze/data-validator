@@ -34,7 +34,7 @@
         "graze/hamcrest-test-listener": "^1.0.1",
 
         "respect/validation": "^1.0",
-        "symfony/validator": "^2.6",
+        "symfony/validator": "^2.6.2",
         "zendframework/zend-validator": "^2.3"
     }
 }
