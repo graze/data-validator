@@ -72,3 +72,9 @@ Here's some example usage with the twig template engine:
     <button type="submit">submit</button>
 </form>
 ```
+
+## License
+
+The content of this library is released under the **MIT License** by **Nature Delivered Ltd**.
+
+You can find a copy of this license at http://www.opensource.org/licenses/mit or in [`LICENSE`](./LICENSE.md).
