@@ -16,25 +16,26 @@ namespace Graze\DataValidator;
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-final class DataValidator implements DataValidatorInterface
+final class DataValidator implements
+    DataValidatorInterface,
+    ProcessorAwareInterface,
+    ValidatorAwareInterface
 {
-    /**
-     * @var array
-     */
-    private $validators = [];
+    use ProcessorAwareTrait;
+    use ValidatorAwareTrait;
 
     /**
      * {@inheritDoc}
      *
-     * @param callable $validator
+     * @param array $data
      *
-     * @return DataValidatorInterface
+     * @return $data
      */
-    public function addValidator(callable $validator)
+    public function process(array $data)
     {
-        $this->validators[] = $validator;
-
-        return $this;
+        return array_reduce($this->processors, function (array $data, callable $processor) {
+            return $processor($data);
+        }, $data);
     }
 
     /**
