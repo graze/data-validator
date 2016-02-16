@@ -11,29 +11,29 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
-namespace Graze\DataValidator;
+namespace Graze\DataValidator\Processor;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-trait ValidatorAwareTrait
+abstract class AbstractExecutableProcessor
 {
     /**
-     * @var array
+     * @param array $data
+     *
+     * @return string
      */
-    protected $validators = [];
+    public function __invoke(array $data)
+    {
+        return $this->process($data);
+    }
 
     /**
-     * {@inheritDoc}
+     * Apply the processor to the given data.
      *
-     * @param callable $validator
+     * @param array $data
      *
-     * @return DataValidatorInterface
+     * @return array
      */
-    public function addValidator(callable $validator)
-    {
-        $this->validators[] = $validator;
-
-        return $this;
-    }
+    abstract protected function process(array $data);
 }

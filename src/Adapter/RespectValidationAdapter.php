@@ -13,6 +13,7 @@
 
 namespace Graze\DataValidator\Adapter;
 
+use Graze\DataValidator\Validator\AbstractExecutableValidator;
 use InvalidArgumentException;
 use Respect\Validation\Validatable;
 
@@ -21,7 +22,7 @@ use Respect\Validation\Validatable;
  *
  * @author Samuel Parkinson <sam@graze.com>
  */
-class RespectValidationAdapter extends AbstractExecutableAdapter
+class RespectValidationAdapter extends AbstractExecutableValidator
 {
     /**
      * @var Respect\Validation\Validatable
