@@ -16,23 +16,24 @@ namespace Graze\DataValidator;
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-interface DataValidatorInterface
+trait ValidatorAwareTrait
 {
     /**
-     * Apply all registered processors to the given data.
-     *
-     * @param callable $data
-     *
-     * @return array An array of the transformed data.
+     * @var array
      */
-    public function process(array $data);
+    protected $validators = [];
 
     /**
-     * Apply all validators to the given data.
+     * {@inheritDoc}
      *
-     * @param array $data
+     * @param callable $validator
      *
-     * @return array An array of validator failures.
+     * @return DataValidatorInterface
      */
-    public function validate(array $data);
+    public function addValidator(callable $validator)
+    {
+        $this->validators[] = $validator;
+
+        return $this;
+    }
 }

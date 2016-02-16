@@ -16,23 +16,16 @@ namespace Graze\DataValidator;
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-interface DataValidatorInterface
+interface ProcessorAwareInterface
 {
     /**
-     * Apply all registered processors to the given data.
+     * Register a processor.
      *
-     * @param callable $data
+     * The callable should accept an array as it's only argument.
      *
-     * @return array An array of the transformed data.
+     * @param callable $processor
+     *
+     * @return DataValidatorInterface
      */
-    public function process(array $data);
-
-    /**
-     * Apply all validators to the given data.
-     *
-     * @param array $data
-     *
-     * @return array An array of validator failures.
-     */
-    public function validate(array $data);
+    public function addProcessor(callable $processor);
 }
