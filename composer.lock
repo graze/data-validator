@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41b594bdf81b92c99cde14703ef092e5",
+    "content-hash": "bc361f507997db798abf71ff1d0f32a1",
     "packages": [],
     "packages-dev": [
         {
@@ -138,6 +138,43 @@
             ],
             "description": "A PHPUnit test listener for the hamcrest assertion library.",
             "time": "2016-02-16T12:14:00+00:00"
+        },
+        {
+            "name": "graze/standards",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/graze/standards.git",
+                "reference": "07709591ae81611bad96d3de0c2d4c6f6bee435f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/graze/standards/zipball/07709591ae81611bad96d3de0c2d4c6f6bee435f",
+                "reference": "07709591ae81611bad96d3de0c2d4c6f6bee435f",
+                "shasum": ""
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graze Developers",
+                    "email": "developers@graze.com"
+                }
+            ],
+            "description": "Graze coding standards",
+            "homepage": "https://github.com/graze/standards",
+            "keywords": [
+                "coding",
+                "graze",
+                "standards"
+            ],
+            "time": "2019-09-20T09:12:46+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
