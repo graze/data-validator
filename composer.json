@@ -35,6 +35,7 @@
 
         "respect/validation": "^1.0",
         "symfony/validator": "^2.6.2",
+        "squizlabs/php_codesniffer": "^3.5",
         "zendframework/zend-validator": "^2.3"
     },
     "config": {
