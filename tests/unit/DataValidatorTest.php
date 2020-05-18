@@ -11,8 +11,11 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
+namespace Graze\DataValidator\Test;
+
 use Graze\DataValidator\DataValidator;
 use Graze\DataValidator\DataValidatorInterface;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
@@ -23,7 +26,10 @@ class DataValidatorTest extends PHPUnit_Framework_TestCase
     {
         $dataValidator = new DataValidator();
 
-        assertThat('`Graze\DataValidator\DataValidator` should implement `Graze\DataValidator\DataValidatorInterface`.',
-            $dataValidator, is(anInstanceOf(DataValidatorInterface::class)));
+        assertThat(
+            '`Graze\DataValidator\DataValidator` should implement `Graze\DataValidator\DataValidatorInterface`.',
+            $dataValidator,
+            is(anInstanceOf(DataValidatorInterface::class))
+        );
     }
 }

@@ -21,7 +21,7 @@ interface DataValidatorInterface
     /**
      * Apply all registered processors to the given data.
      *
-     * @param callable $data
+     * @param array $data
      *
      * @return array An array of the transformed data.
      */

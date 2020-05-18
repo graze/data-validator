@@ -11,9 +11,15 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
+namespace Graze\DataValidator\Test\Adapter;
+
 use Graze\DataValidator\Adapter\RespectValidationAdapter;
+use InvalidArgumentException;
+use Mockery;
+use PHPUnit_Framework_TestCase;
 use Respect\Validation\Validatable as RespectValidatable;
 use Respect\Validation\Validator;
+use stdClass;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidatorInterface;
 use Zend\Validator\ValidatorInterface as ZendValidatorInterface;
 
@@ -35,12 +41,16 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidNameProvider
      * @expectedException InvalidArgumentException
+     * @param string $invalidName
      */
     public function testConstructorThrowsOnInvalidNameParameters($invalidName)
     {
         new RespectValidationAdapter($invalidName, Mockery::mock(RespectValidatable::class));
     }
 
+    /**
+     * @return array
+     */
     public function invalidNameProvider()
     {
         return [[null], [1], [[]], [0.0], [true], [new stdClass()]];
@@ -48,8 +58,9 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider validNameProvider
+     * @param string $validName
      */
-    public function testConstructorAcceptsValidNamePrameters($validName)
+    public function testConstructorAcceptsValidNameParameters($validName)
     {
         $respectValidator = Mockery::mock(RespectValidatable::class);
         $respectValidator->shouldReceive('setName');
@@ -59,6 +70,9 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
         assertThat($validator, is(callableValue()));
     }
 
+    /**
+     * @return string[][]
+     */
     public function validNameProvider()
     {
         return [[''], ['foo'], ['foo_bar'], ['foo bar']];
@@ -75,8 +89,11 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
 
         $validator = new RespectValidationAdapter($name, $respectValidator);
 
-        assertThat('The respect validation adapter should return the validator name on failed validations.',
-            $validator([]), is($name));
+        assertThat(
+            'The respect validation adapter should return the validator name on failed validations.',
+            $validator([]),
+            is($name)
+        );
     }
 
     public function testShouldWorkWithZendValidators()
@@ -88,8 +105,11 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
 
         $validator = new RespectValidationAdapter('failed_validator', $respectValidator);
 
-        assertThat('The respect validation adapter should work with Respects Zend validation rule.',
-            $validator(['test' => 'foo']), is('failed_validator'));
+        assertThat(
+            'The respect validation adapter should work with Respects Zend validation rule.',
+            $validator(['test' => 'foo']),
+            is('failed_validator')
+        );
     }
 
     public function testShouldWorkWithSymfonyValidators()
@@ -98,7 +118,10 @@ class RespectValidationAdapterTest extends PHPUnit_Framework_TestCase
 
         $validator = new RespectValidationAdapter('failed_validator', $respectValidator);
 
-        assertThat('The respect validation adapter should work with Respects Symfony validation rule.',
-            $validator(['test' => 'Not a time.']), is('failed_validator'));
+        assertThat(
+            'The respect validation adapter should work with Respects Symfony validation rule.',
+            $validator(['test' => 'Not a time.']),
+            is('failed_validator')
+        );
     }
 }
