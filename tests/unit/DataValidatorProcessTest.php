@@ -23,18 +23,25 @@ class DataValidatorProcessTest extends PHPUnit_Framework_TestCase
     {
         $dataValidator = new DataValidator();
 
-        $processor = function () {};
+        $processor = function () {
+        };
 
-        assertThat('`addProcessor` should return the `Graze\DataValidator\DataValidator` instance.',
-            $dataValidator->addProcessor($processor), is($dataValidator));
+        assertThat(
+            '`addProcessor` should return the `Graze\DataValidator\DataValidator` instance.',
+            $dataValidator->addProcessor($processor),
+            is($dataValidator)
+        );
     }
 
     public function testProcessDoesNothingWithNoRegisteredProcessors()
     {
         $dataValidator = new DataValidator();
 
-        assertThat('`process` should return the given array of data if there are no registered processors.',
-            $dataValidator->process(['foo' => 'bar']), is(anArray(['foo' => 'bar'])));
+        assertThat(
+            '`process` should return the given array of data if there are no registered processors.',
+            $dataValidator->process(['foo' => 'bar']),
+            is(anArray(['foo' => 'bar']))
+        );
     }
 
     public function testProcessAppliesAllProcessors()
@@ -53,7 +60,10 @@ class DataValidatorProcessTest extends PHPUnit_Framework_TestCase
             return $data;
         });
 
-        assertThat('`process` should apply all registered processors to the given data array.',
-            $dataValidator->process([]), is(anArray(['one' => 1, 'two' => 2])));
+        assertThat(
+            '`process` should apply all registered processors to the given data array.',
+            $dataValidator->process([]),
+            is(anArray(['one' => 1, 'two' => 2]))
+        );
     }
 }

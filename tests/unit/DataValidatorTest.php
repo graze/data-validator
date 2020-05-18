@@ -23,7 +23,10 @@ class DataValidatorTest extends PHPUnit_Framework_TestCase
     {
         $dataValidator = new DataValidator();
 
-        assertThat('`Graze\DataValidator\DataValidator` should implement `Graze\DataValidator\DataValidatorInterface`.',
-            $dataValidator, is(anInstanceOf(DataValidatorInterface::class)));
+        assertThat(
+            '`Graze\DataValidator\DataValidator` should implement `Graze\DataValidator\DataValidatorInterface`.',
+            $dataValidator,
+            is(anInstanceOf(DataValidatorInterface::class))
+        );
     }
 }
