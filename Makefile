@@ -35,12 +35,51 @@ composer-%: ## Run a composer command, `make "composer-<command> [...]"`.
         -v ~/.ssh:/root/.ssh:ro \
         composer --ansi --no-interaction $* $(filter-out $@,$(MAKECMDGOALS))
 
-test: ## Run all the tests 🚀.
-test: test-unit
+# Testing
+
+test: ## Run the unit and integration testsuites.
+test: lint test-unit test-integration
+
+lint: ## Check the syntax of PHP and Markdown files
+lint: lint-php lint-md
+
+lint-php: ## Run phpcs against the code.
+	${DOCKER_RUN} vendor/bin/phpcs -p --warning-severity=0 src/ tests/
+
+lint-md: ## Run markdownlist against the documentation
+	${DOCKER} run --rm -v $$(pwd):/data:cached gouvinb/docker-markdownlint -v *.md docs/*.md docs/*/*.md
+
+lint-fix: ## Run phpcsf and fix possible lint errors.
+	${DOCKER_RUN} vendor/bin/phpcbf -p src/ tests/
 
 test-unit: ## Run the unit testsuite.
-	docker run --rm -t -v $$(pwd):/usr/src/graze-queue -w /usr/src/graze-queue php:7.0-cli \
-	vendor/bin/phpunit --testsuite unit
+	${DOCKER_RUN} vendor/bin/phpunit --testsuite unit
+
+test-integration: ## Run the integration testsuite.
+	${DOCKER_RUN} vendor/bin/phpunit --testsuite integration
+
+test-lowest: ## Test using the lowest possible versions of the dependencies
+test-lowest: PREFER_LOWEST=--prefer-lowest
+test-lowest: build-update test
+
+test-matrix-lowest: ## Test all version, with the lowest version
+	${MAKE} test-matrix PREFER_LOWEST=--prefer-lowest
+	${MAKE} build-update
+
+test-matrix: ## Run the unit tests against multiple targets.
+	${MAKE} PHP_VER="5.6" build-update test
+	${MAKE} PHP_VER="7.0" build-update test
+	${MAKE} PHP_VER="7.1" build-update test
+	${MAKE} PHP_VER="7.2" build-update test
+
+test-coverage: ## Run all tests and output coverage to the console.
+	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-text
+
+test-coverage-html: ## Run all tests and output coverage to html.
+	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-html=./tests/report/html
+
+test-coverage-clover: ## Run all tests and output clover coverage to file.
+	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-clover=./tests/report/coverage.clover
 
 clean: ## Clean up the project.
 	rm -rf vendor/
