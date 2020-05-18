@@ -11,9 +11,15 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
+namespace Graze\DataValidator\Test\Adapter;
+
 use Graze\DataValidator\Adapter\RespectValidationAdapter;
+use InvalidArgumentException;
+use Mockery;
+use PHPUnit_Framework_TestCase;
 use Respect\Validation\Validatable as RespectValidatable;
 use Respect\Validation\Validator;
+use stdClass;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidatorInterface;
 use Zend\Validator\ValidatorInterface as ZendValidatorInterface;
 

@@ -11,8 +11,11 @@
  * @license https://github.com/graze/data-validator/blob/master/LICENSE MIT
  */
 
+namespace Graze\DataValidator\Test;
+
 use Graze\DataValidator\DataValidator;
 use Graze\DataValidator\DataValidatorInterface;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
